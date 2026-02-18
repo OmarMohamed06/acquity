@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Configure dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+  }
+}
+
+/* =========================
+   GLOBAL BASE STYLES
+   ========================= */
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+/* =========================
+   COMPONENT STYLES
+   ========================= */
+.input {
+  @apply border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500;
+}
+
+button,
+[role="button"],
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+  @apply cursor-pointer;
+}

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SEO Marketplace Testing</title>
+  <style>
+    body { font-family: Arial; margin: 20px; max-width: 1200px; }
+    .test { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+    .pass { background: #d4edda; border-color: #c3e6cb; }
+    .fail { background: #f8d7da; border-color: #f5c6cb; }
+    h1 { color: #333; }
+    code { background: #f5f5f5; padding: 2px 6px; border-radius: 3px; }
+    a { color: #0066cc; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .url { font-weight: bold; color: #0066cc; }
+  </style>
+</head>
+<body>
+  <h1>🎯 SEO Marketplace Architecture - Testing Guide</h1>
+
+  <h2>✅ New Routes Created</h2>
+  
+  <div class="test pass">
+    <h3>Root Pages (Indexable)</h3>
+    <p><span class="url">/businesses-for-sale</span> - All businesses</p>
+    <p><span class="url">/franchises-for-sale</span> - All franchises</p>
+    <p>📌 Status: index, follow | No canonical needed</p>
+  </div>
+
+  <div class="test pass">
+    <h3>Filtered Pages by Country (Indexable)</h3>
+    <p><span class="url">/businesses-for-sale/uae</span></p>
+    <p><span class="url">/businesses-for-sale/usa</span></p>
+    <p><span class="url">/franchises-for-sale/uk</span></p>
+    <p>📌 Status: index, follow | No canonical needed</p>
+  </div>
+
+  <div class="test pass">
+    <h3>Filtered Pages by Country + Industry (Indexable)</h3>
+    <p><span class="url">/businesses-for-sale/uae/food-beverage</span></p>
+    <p><span class="url">/businesses-for-sale/usa/technology</span></p>
+    <p><span class="url">/franchises-for-sale/uk/fast-food</span></p>
+    <p>📌 Status: index, follow | No canonical needed</p>
+  </div>
+
+  <div class="test pass">
+    <h3>Filtered Pages with Query Parameters (NOT Indexable)</h3>
+    <p><span class="url">/businesses-for-sale/uae/food-beverage?city=Dubai&price_min=100000&price_max=500000</span></p>
+    <p><span class="url">/franchises-for-sale/usa?sort=price_high</span></p>
+    <p>📌 Status: noindex, follow</p>
+    <p>📌 Canonical: Points to base page without query params</p>
+  </div>
+
+  <h2>🔧 API Testing</h2>
+
+  <div class="test pass">
+    <h3>GET Request (Query Parameters)</h3>
+    <pre>GET /api/listings?type=business_sale&country=UAE&industry=Food%20%26%20Beverage&city=Dubai&price_min=100000&sort=newest&page=1&pageSize=12</pre>
+  </div>
+
+  <div class="test pass">
+    <h3>POST Request (JSON Body)</h3>
+    <pre>POST /api/listings
+Content-Type: application/json
+
+{
+  "type": "business_sale",
+  "country": "UAE",
+  "industry": "Food & Beverage",
+  "filters": {
+    "city": "Dubai",
+    "price_min": 100000,
+    "price_max": 500000,
+    "sort": "newest"
+  },
+  "page": 1,
+  "pageSize": 12
+}</pre>
+  </div>
+
+  <h2>📋 Filter UI Features</h2>
+  <ul>
+    <li>✅ City input field</li>
+    <li>✅ Min/Max price inputs</li>
+    <li>✅ Sort dropdown (Newest, Price Low→High, Price High→Low)</li>
+    <li>✅ "Apply Filters" button (only updates URL on click)</li>
+    <li>✅ Removable filter chips showing active filters</li>
+    <li>✅ Real-time filter state (no URL update until Apply clicked)</li>
+    <li>✅ Pagination with Previous/Next buttons</li>
+    <li>✅ Sticky sidebar on desktop</li>
+    <li>✅ Responsive mobile layout</li>
+  </ul>
+
+  <h2>🎨 UI Components</h2>
+  <ul>
+    <li>Breadcrumb navigation</li>
+    <li>Filter sidebar with sticky positioning</li>
+    <li>Active filter chips (removable)</li>
+    <li>Listings grid (2 columns on desktop, 1 on mobile)</li>
+    <li>Listing cards with image, title, city, price, revenue</li>
+    <li>Pagination controls</li>
+    <li>Loading states</li>
+    <li>Empty state message</li>
+  </ul>
+
+  <h2>📊 Mock Data</h2>
+  <p>8 sample listings included with:</p>
+  <ul>
+    <li>Types: business_sale, franchise_sale</li>
+    <li>Countries: UAE, USA, UK</li>
+    <li>Industries: Food & Beverage, Technology, Retail, Health & Wellness, Marketing</li>
+    <li>Price range: $150K - $800K</li>
+    <li>Revenue data: $350K - $2.5M</li>
+  </ul>
+
+  <h2>🚀 How to Test</h2>
+  <ol>
+    <li>Navigate to <a href="http://localhost:3000/businesses-for-sale">http://localhost:3000/businesses-for-sale</a></li>
+    <li>Click on a country to see indexed page</li>
+    <li>Click on an industry to see filtered page</li>
+    <li>Use filter inputs (City, Price, Sort)</li>
+    <li>Click "Apply Filters" to update URL with query params</li>
+    <li>Click ✕ on filter chips to remove individual filters</li>
+    <li>Check DevTools → Network → Headers for robots directive</li>
+    <li>Check source for canonical URL and structured data</li>
+  </ol>
+
+  <h2>📝 Files Created/Modified</h2>
+  <ul>
+    <li>✅ <code>lib/seo-helpers.ts</code> - Metadata generation</li>
+    <li>✅ <code>app/businesses-for-sale/page.tsx</code> - Root page</li>
+    <li>✅ <code>app/businesses-for-sale/[country]/[industry]/page.tsx</code> - Filtered page</li>
+    <li>✅ <code>app/franchises-for-sale/page.tsx</code> - Root page</li>
+    <li>✅ <code>app/franchises-for-sale/[country]/[industry]/page.tsx</code> - Filtered page</li>
+    <li>✅ <code>app/api/listings/route.ts</code> - API (GET + POST)</li>
+  </ul>
+
+  <h2>🎯 What's Next</h2>
+  <ol>
+    <li>Replace mock data with real database queries</li>
+    <li>Add investment-for-sale routes (same pattern)</li>
+    <li>Implement 301 redirects from old /listings URLs</li>
+    <li>Add sitemap.xml generation</li>
+    <li>Test with Google Search Console</li>
+    <li>Implement generateStaticParams() for static generation</li>
+  </ol>
+
+  <script>
+    document.querySelectorAll('a[href*="localhost:3000"]').forEach(link => {
+      link.onclick = (e) => {
+        e.preventDefault();
+        const url = link.href;
+        alert('Navigate to: ' + url + '\n\nIn dev mode, the server runs at http://localhost:3000');
+      };
+    });
+  </script>
+</body>
+</html>
