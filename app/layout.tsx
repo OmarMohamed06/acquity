@@ -4,6 +4,7 @@ import { ThemeProvider } from "./context/ThemeContext";
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
 import JsonLd from "@/components/seo/JsonLd";
+import Script from "next/script";
 
 import type { ReactNode } from "react";
 import { getBaseUrl } from "@/lib/seo/base-url";
@@ -97,6 +98,20 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <Footer />
           </AuthProvider>
         </ThemeProvider>
+
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-KY3PZKMVDL"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-KY3PZKMVDL');
+          `}
+        </Script>
       </body>
     </html>
   );
