@@ -15,6 +15,9 @@ export const metadata = {
     template: "%s | Acquity",
   },
   description: "Buy, sell, and invest in businesses globally",
+  icons: {
+    icon: "/favicon.ico",
+  },
   alternates: {
     canonical: "/",
   },
