@@ -35,7 +35,7 @@ input[type="reset"] {
    MATERIAL SYMBOLS ICONS
    ========================= */
 .material-symbols-outlined {
-  font-family: 'Material Symbols Outlined', sans-serif !important;
+  font-family: 'Material Symbols Outlined', 'Material Icons';
   font-weight: normal;
   font-style: normal;
   font-size: 24px;
@@ -51,9 +51,31 @@ input[type="reset"] {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   font-feature-settings: 'liga';
-  font-variation-settings:
-    'FILL' 0,
-    'wght' 400,
-    'GRAD' 0,
-    'opsz' 24;
+  user-select: none;
+}
+
+/* Ensure icons inherit proper sizing from parent */
+.material-symbols-outlined[class*="text-"] {
+  font-size: inherit;
+}
+
+/* Material Icons fallback */
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  vertical-align: middle;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'liga';
+  user-select: none;
 }
