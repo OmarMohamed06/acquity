@@ -4,11 +4,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/app/context/AuthContext";
+import { useTheme } from "@/app/context/ThemeContext";
 import { useState, useRef, useEffect } from "react";
 import { supabase } from "@/lib/supabase/client";
 
 export default function Navbar() {
   const { user, logout } = useAuth();
+  const { theme } = useTheme();
   const router = useRouter();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -72,7 +74,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center shrink-0">
             <Image
-              src="/logo.svg"
+              src={theme === "dark" ? "/logo-dark.png" : "/logo.svg"}
               alt="Acquity"
               width={220}
               height={66}

@@ -2,9 +2,11 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useTheme } from "@/app/context/ThemeContext";
 import { useState, type FormEvent } from "react";
 
 export default function Footer() {
+  const { theme } = useTheme();
   const successStoriesEnabled = false;
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<{
@@ -66,7 +68,7 @@ export default function Footer() {
           <div>
             <Link href="/" className="inline-block mb-6">
               <Image
-                src="/logo.svg"
+                src={theme === "dark" ? "/logo-dark.svg" : "/logo.svg"}
                 alt="Acquity"
                 width={180}
                 height={54}
