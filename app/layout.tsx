@@ -17,7 +17,7 @@ export const metadata = {
   },
   description: "Buy, sell, and invest in businesses globally",
   icons: {
-    icon: "/favicon.ico.jpg",
+    icon: "/favicon.ico",
   },
   alternates: {
     canonical: "/",
