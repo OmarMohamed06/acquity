@@ -12,7 +12,7 @@ import { getBaseUrl } from "@/lib/seo/base-url";
 export const metadata = {
   metadataBase: new URL(getBaseUrl()),
   title: {
-    default: "Acquity - Premium Business Marketplace",
+    default: "Acquity - Buy & Sell Businesses Globally",
     template: "%s | Acquity",
   },
   description: "Buy, sell, and invest in businesses globally",
